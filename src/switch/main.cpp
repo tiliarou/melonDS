@@ -493,11 +493,11 @@ int main(int argc, char** argv)
     audoutInitialize();
     audoutStartAudioOut();
 
-    BufferData = (u8*)memalign(0x1000, 710 * 2 * 4);
+    BufferData = (u8*)memalign(0x1000, (710 * 2 * 2 + 0xfff) & ~0xfff);
     AudioBuffer.next = NULL;
     AudioBuffer.buffer = BufferData;
-    AudioBuffer.buffer_size = 710 * 2 * 4;
-    AudioBuffer.data_size = 710 * 2 * 4;
+    AudioBuffer.buffer_size = (710 * 2 * 2 + 0xfff) & ~0xfff;
+    AudioBuffer.data_size = 710 * 2 * 2;
     AudioBuffer.data_offset = 0;
 
     Thread audio;
